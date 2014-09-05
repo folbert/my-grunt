@@ -88,15 +88,21 @@ module.exports = function(grunt) {
         }
       }
     },
+    concat: {
+      dev: {
+        src: jsSrcFiles,
+        dest: jsDevTarget
+      }
+    },
     notify: {
       sass: {
         options: {
           message : 'Sass task completed.'
         }
       },
-      uglify: {
+      concat: {
         options: {
-          message : 'Uglify task completed.'
+          message : 'Concat task completed.'
         }
       }
     },
@@ -109,7 +115,7 @@ module.exports = function(grunt) {
       },
       js: {
         files : jsSrcFiles,
-        tasks : ['jshint:dev', 'uglify:dev']
+        tasks : ['jshint:dev', 'concat:dev', 'notify:concat']
       },
       grunt: {
         files : ['Gruntfile.js']
@@ -127,6 +133,7 @@ module.exports = function(grunt) {
 
   // Loads all required tasks
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
