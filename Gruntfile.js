@@ -11,11 +11,11 @@
 
 module.exports = function(grunt) {
 
-  var sassFilesRoot = 'assets/css/_src';
+  var cssSrcFilesRoot = 'assets/css/_src';
 
-  var sassSrcFile = sassFilesRoot + '/main.scss';
-  var sassDevTarget = 'assets/css/main.css';
-  var sassDistTarget = sassDevTarget;
+  var cssSrcFile = cssFilesRoot + '/main.scss';
+  var cssDevTarget = 'assets/css/main.css';
+  var cssDistTarget = cssDevTarget;
 
   // Which JS files to merge. Put them in the order that they should be merged.
 
@@ -35,11 +35,11 @@ module.exports = function(grunt) {
   * ----------------------------
   */
 
-  var devSassFiles = {};
-  devSassFiles[sassDevTarget] = sassSrcFile;
+  var devCssFiles = {};
+  devCssFiles[cssDevTarget] = cssSrcFile;
 
-  var distSassFiles = {};
-  distSassFiles[sassDistTarget] = sassSrcFile;
+  var distCssFiles = {};
+  distCssFiles[cssDistTarget] = cssSrcFile;
 
   var devJsFiles = {};
   devJsFiles[jsDevTarget] = jsSrcFiles;
@@ -55,14 +55,14 @@ module.exports = function(grunt) {
     },
     sass: {
       dist: {
-        files: distSassFiles,
+        files: distCssFiles,
         options: {
           loadPath : require('node-bourbon').includePaths,
           style    : 'compressed'
         }
       },
       dev: {
-        files: devSassFiles,
+        files: devCssFiles,
         options: {
           loadPath  : require('node-bourbon').includePaths,
           sourcemap : true,
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
     watch: {
       sass: {
         files: [
-          sassFilesRoot + '/**/*.scss'
+          cssFilesRoot + '/**/*.scss'
         ],
         tasks: ['sass:dev', 'notify:sass']
       },
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
       livereload: {
         // Browser live reloading
         // https://github.com/gruntjs/grunt-contrib-watch#live-reloading
-        files: [sassDevTarget,jsDevTarget],
+        files: [cssDevTarget,jsDevTarget],
         options: {
           livereload: true
         }
